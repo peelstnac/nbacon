@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage{cancel}
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{amsmath,amsthm,amssymb,scrextend}
+\usepackage{fancyhdr}
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\newtheorem{defn}{Definition}
+\newtheorem{exer}{Exercise}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\begin{addmargin}[1em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\begin{document}
+\title{}
+\author{}
+\maketitle
+
+\section{Power Series} 
+\begin{defn} 
+Power series are of the form $$\sum_{n=0}^\infty a_nx^n = a_0+a_1x+a_2x^2+a_3x^3+...$$ 
+\end{defn}
+
+The goal of this section is to explain the circumstances where the continuity and differentiability properties of polynomials are kept with a power series (think polynomial of infinite degree). 
+
+\begin{shaded} 
+\begin{enumerate} 
+    \item Consider sequence of functions $g_n(x)=x^n$ on $[0, 1].$ Now $$\lim_{n \rightarrow \infty} g_n(x) = g(x)$$ where $g(x)=0$ if $0 \le x < 1$ and $g(x)=1$ if $x=1.$ Here, we see example of sequence of continuous functions converging to $g(x)$ which is discontinuous at $g(1).$
+    \item Another example of the limit function not inheriting its sequence's properties can be seen with $h_n(x) = x^{\frac{2n}{2n-1}}.$ Since $$h(x) = \lim_{n \rightarrow \infty} h_n(x) = |x|,$$ we see that $h$ is not differentiable at $h(0).$
+\end{enumerate}
+\end{shaded}
+
+\begin{defn}
+A sequence of functions $f_n: X \rightarrow R$ converges pointwise to $f$ on $X$ if for all $x \in X,$ the sequence $f_n(x)$ converges to $f(x).$
+\end{defn}
+
+\begin{defn}
+Our sequence $f_n$ converges uniformly to $f$ on $X$ if for any $\epsilon > 0,$ there exists $N$ such that $|f_{n \ge N}(x)-f(x)|<\epsilon$ for all $x \in X.$
+\end{defn}
+\noindent Since with pointwise convergence, neither continuity nor differentiability are guaranteed to be preserved, we consider uniform convergence.
+
+\begin{theorem}{(Cauchy Criterion for Uniform Convergence)}
+If for any $\epsilon > 0,$ there exist $N$ such that $|f_{n \ge N}(x) - f_{m \ge N}(x)| < \epsilon,$ then $(f_n) \rightarrow f$ uniformly.
+\end{theorem}
+\begin{proof}
+Suppose the above were true. Fix an arbitrary $x \in X.$ For any $\epsilon > 0,$ there is $N$ where $|f_{n \ge N}(x) - f_{m \ge N}(x)| < \epsilon.$ By Cauchy Criterion for Convergent Sequences, $(f_n(x))$ converges to some value $f(x).$ Since $N$ is not dependant on $x,$ we can say this is true for all $x \in X$ and so $(f_n(x)) \rightarrow f(x)$ uniformly.
+\end{proof}
+\end{document}
