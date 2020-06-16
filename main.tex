@@ -61,4 +61,47 @@ If for any $\epsilon > 0,$ there exist $N$ such that $|f_{n \ge N}(x) - f_{m \ge
 \begin{proof}
 Suppose the above were true. Fix an arbitrary $x \in X.$ For any $\epsilon > 0,$ there is $N$ where $|f_{n \ge N}(x) - f_{m \ge N}(x)| < \epsilon.$ By Cauchy Criterion for Convergent Sequences, $(f_n(x))$ converges to some value $f(x).$ Since $N$ is not dependant on $x,$ we can say this is true for all $x \in X$ and so $(f_n(x)) \rightarrow f(x)$ uniformly.
 \end{proof}
+
+\noindent Indeed, continuity is preserved with uniform convergence.
+\begin{theorem}
+Suppose each function in the sequence of functions $f_n:X \rightarrow R$ is continuous at $c \in X.$ If $(f_n(x)) \rightarrow f(x)$ uniformly, then $f$ is continuous at $c.$
+\end{theorem}
+\begin{proof}
+Fix $\frac{\epsilon}{3} > 0.$ There must exist $N$ such that $|f_N(x)-f(x)|<\frac{\epsilon}{3}$ and $|f_N(c)-f(c)|<\frac{\epsilon}{3}.$ Furthermore, since $f_N$ is continuous, it follows that there exists $\delta$ where $|x-c|<\delta \implies |f_N(x)-f_N(c)|<\frac{\epsilon}{3}.$ It follows that $$|f(x)-f(c)+f_N(x)-f_N(x)+f_N(c)-f_N(c)| \le |f_N(x)-f(x)|+|f_N(c)-f(c)|+|f_N(x)-f_N(c)| < \epsilon.$$
+\end{proof}
+
+\begin{theorem}
+Let $X = \{x_1, x_2, x_3, ...\},$ a countable set of real numbers. If there is a bounded sequence of functions $f_n:X \rightarrow R,$ it follows that there exist a pointwise convergent subsequence.
+\end{theorem}
+\begin{proof}
+Consider the sequence $f_n(x_1).$ Since this sequence is bouded, by Bolzano-Weierstrass theorem, there is a convergent subsequence $F_n(x_1).$ Now consider $F_n(x_2)$ (ie. the functions part of the convergent subsequence for $x_1$ applied to $x_2$). Like with $x_1,$ we can generate a subsequence of $F_n$ (so we're nesting subsequences). Let us keep generating subsequences in this manner. Now, let us create a new sequence of functions in the following manner. Enumerate through $x_1, x_2, x_3, ...:$ for $x_1,$ pick $f_{k_1}$ where $f_{k_1}(x_1)$ is part of $x_1$'s subsequence. For $x_n,$ pick $f_{k_n}$ in the same manner but make sure that $k_n > k_{n-1}.$ Notice how for any point $x_i,$ the sequence $f_{k_i}(x_i), f_{k_{i+1}}(x_i), f_{k_{i+2}}(x_i)...$ is convergent. Therefore, $(f_{k_n})$ converges pointwise to some function.
+\end{proof}
+
+\noindent This is one condition where the idea of Bolzano-Weierstrass can be applied to sequences of functions. Do pay special attention to the fact that $f_n$ was bounded. We present another condition, but this time it implies uniform continuity.
+
+\begin{defn}
+A function $f_n:X \rightarrow R$ is called equicontinuous if for all $\epsilon > 0,$ there exist $\delta > 0$ such that $$|x-c| < \delta \implies |f_{n \ge N}(x) - f_{n \ge N}(c)| < \epsilon$$ for any $x$ and $c$ in domain.
+\end{defn}
+\noindent Note that this is stronger than uniform continuity since $\delta$ is decided for all the functions as well.
+\begin{theorem}{(Arzela-Ascoli Theorem)}
+Consider bounded sequence of functions $f_n:[A, B] \rightarrow R$ where each function is equicontinuous. There exists a uniformly convergent subsequence of $f_n.$
+\end{theorem}
+\begin{proof}
+Fix $E > 0.$ Let $\epsilon = \frac{E}{2}.$ Consider the countable set of rational numbers within the domain $\{r_1, r_2, r_3, ...\}.$ From theorem 3, it follows that there exist subsequence of functions $f_{n_k}$ that is pointwise convergent on these rational numbers. Due to equicontinuity, there exist $\delta$ such that $$|x-c| < \delta \implies |f_n(x)-f_n(c)| < \epsilon$$ for all $x$ and $c$ in $[A, B].$ Now let $\{V_{\delta}(r_{n_1}), V_{\delta}(r_{n_2}), V_{\delta}(r_{n_3}), ..., V_{\delta}(r_{n_L})\}$ be a finite open cover of $[A, B]$ consisting of $\delta$ neighborhoods of $r_{n_i},$ who are rational numbers within $[A, B].$ For each $r_{n_i},$ let there be corresponding $N_i$ such that $|f_{n \ge N_i}(r_{n_i})-f_{m \ge N_i}(r_{n_i})| < \frac{\epsilon}{3}$ (we know such value exist from our proof about pointwise convergence earlier). Now, define $$N = \max \{N_1, N_2, N_3, ..., N_L\}.$$ Consider two real numbers $a, b$ in $[A, B].$ Because rational numbers are dense in the reals, we can pick two distinct rational numbers $R_1, R_2$ in the $\delta$ neighborhoods of $a$ and $b$ respectively. We know, from triangle inequality, that for $E > 0$ there exist $N$ such that
+\begin{align*}
+|f_{n \ge N}(a)-f_{m \ge N}(b)| &= |f_{n \ge N}(a)-f_{m \ge N}(b) - f_{n \ge N}(R_1) + f_{n \ge N}(R_1) - f_{m \ge N}(R_2) + f_{m \ge N}(R_2)| \\
+&\le |f_{n \ge N}(a) - f_{n \ge N}(R_1)| + |f_{m \ge N}(b) - f_{n \ge N}(R_2)| + |f_{n \ge N}(R_1) - f_{m \ge N}(R_2)| \\
+&\le \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} \\
+&\le \epsilon \\
+&< E.
+\end{align*}
+\end{proof}
+
+\noindent Now we examine the conditions where differentiability is preserved.
+\begin{theorem}
+If $f_n:[A, B]$ is a sequence of differentiable functions with the sequence $(f'_n) \rightarrow g$ uniformly and for some $x \in [A, B]$ the sequence $f_n(x)$ is convergent, then $(f_n) \rightarrow f$ uniformly and $f'(x) = g(x).$
+\end{theorem}
+\begin{proof}
+
+\end{proof}
 \end{document}
